@@ -1,1 +1,6 @@
 :root { --var-appname : 'unknow' ; }
+
+.field { width     : 80% ;
+         max-width : 1000px ;
+         min-width : 700px ;
+       }
