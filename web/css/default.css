@@ -4,3 +4,44 @@
          max-width : 1000px ;
          min-width : 700px ;
        }
+
+#maintitle {
+	width: 100%;
+	background: linear-gradient(to left, black, red);
+	-webkit-text-fill-color: transparent;  /* rend tout l'arrière-plan dégardé transparent */
+    -webkit-background-clip: text;  /* remplit le texte avec l'arrière-plan dégardé */
+	text-align: center; /* positionne le titre au centre */
+	font-size: 100px;
+	margin-top: 5%
+}
+
+#morse {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;  
+	position:fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 100;
+	z-index: -1;
+}
+
+#menu {
+	width: 100%;
+	font-size: 40px;
+	background: linear-gradient(to left, black, red);
+	-webkit-text-fill-color: transparent;  /* rend tout l'arrière-plan dégardé transparent */
+    -webkit-background-clip: text;  /* remplit le texte avec l'arrière-plan dégardé */
+	position: sticky; /* Le menu va "coller" au haut de la page lorsqu'il le rencontrera (il ne va pas disparaître en haut) */
+	top: 0;
+	background-color: rgb(106, 125, 87);
+	text-align: center;
+	margin-top: 5%;
+	z-index: 1;
+}
+
+.liens_menu {
+	color: white;
+	text-decoration: none;
+}
