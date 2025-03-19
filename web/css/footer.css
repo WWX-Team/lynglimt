@@ -1,4 +1,5 @@
-:root { --var--color-ft-bg : rgb(207, 226, 243) ;
+:root { --var--color-ft-bg        : rgb(207, 226, 243) ;
+        --var--color-ft-txt       : rgb(13, 12, 67) ;
       }
 
 footer { display : flex ;
@@ -8,6 +9,9 @@ footer { display : flex ;
 footer .footerBar { width : 100% ;
                     background-color : var(--var--color-ft-bg) ;
                     box-shadow       : 0 -4px 8px var(--var--color-ft-bg) ;
+                    color            : var(--var--color-ft-txt) ;
+
+                    transition : all 0.2s ease ;
                   }
 
 footer .footerLST { display		 : flex ;
@@ -32,6 +36,6 @@ footer .footerColumn { list-style  : none ;
                        margin      : 0.25em 0em ;
                      }
 
-footer .footerEl { font-weight : normal ; }
+footer .footerEl { font-weight : normal !important ; }
 
 footer ul { margin : 0px ; padding : 0px ; }
