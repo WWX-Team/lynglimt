@@ -1,0 +1,41 @@
+:root { --var--color-ft-bg        : rgb(207, 226, 243) ;
+        --var--color-ft-txt       : rgb(13, 12, 67) ;
+      }
+
+footer { display : flex ;
+         justify-content  : center ;
+       }
+
+footer .footerBar { width : 100% ;
+                    background-color : var(--var--color-ft-bg) ;
+                    box-shadow       : 0 -4px 8px var(--var--color-ft-bg) ;
+                    color            : var(--var--color-ft-txt) ;
+
+                    transition : all 0.2s ease ;
+                  }
+
+footer .footerLST { display		 : flex ;
+                    justify-content : space-between ;
+                    align-items     : baseline ;
+                    
+                    padding : 0px ;
+                    margin  : 0.75em auto ;
+                  }
+
+footer .footerTitle { margin : 0em 0.5em ;
+                      display		  : flex ;
+                      flex-direction  : column ;
+                      justify-content : space-evenly ;
+
+                      list-style  : none ;
+                      text-align  : left ;
+                      font-weight : bold ;
+                    }
+
+footer .footerColumn { list-style  : none ;
+                       margin      : 0.25em 0em ;
+                     }
+
+footer .footerEl { font-weight : normal !important ; }
+
+footer ul { margin : 0px ; padding : 0px ; }
