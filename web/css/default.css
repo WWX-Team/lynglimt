@@ -1,16 +1,25 @@
-:root {	--var-color-bg     : rgb(229, 235, 240) ;
-		--var-color-nav-bd : rgb(24, 43, 64) ; 
+:root {	--var-color-bg     : rgb(207, 226, 243) ;
         --var-color-nav-bg : rgb(255, 255, 255, 0.1) ;
 		
-		--var-color-main-bg     : rgb(240, 240, 240, 0.3) ;
-		--var-color-main-button : rgb(157, 202, 239) ;
+		--var-color-main-bg : rgb(240, 240, 240, 0.25) ;
+
+		--var-color-main-button       : rgb(157, 202, 239) ;
+		--var-color-main-button-hover : rgb(213, 233, 250) ;
+		--var-color-main-button-txt       : rgb(24, 79, 130) ;
+		--var-color-main-button-txt-hover : rgb(19, 63, 104) ;
 
 		--var-color-prompt-bg  : rgb(30, 45, 57) ;
 		--var-color-prompt-txt : rgb(255, 255, 255) ;
 		--var-color-prompt-bd  : rgb(56, 86, 110) ;
 
-		--var-color-prompt-info     : rgb(17, 47, 71, 0.2) ;
+		--var-color-prompt-info     : rgb(17, 47, 71, 0.25) ;
 		--var-color-prompt-info-txt : rgb(240, 240, 240) ;
+
+		--var-color-link       : rgb(24, 79, 130) ;
+		--var-color-link-hover : rgb(151, 30, 66) ;
+
+		--var-color-main-title : rgb(42, 48, 59) ;
+		--var-color-main-txt   : rgb(42, 48, 59) ; 
       }
 
 body { padding : 0px ;
@@ -30,58 +39,69 @@ body { padding : 0px ;
 		background-size   : cover;
 		} 
 
-#main { margin : 1em 0em ; }
+#main { margin : 2em 0em ; color : var(--var-color-main-txt) ; }
 
 .box {	padding : 1em ;
-		margin  : 0em ;
+		margin  : 1em 0em ;
 
 		background-color : var(--var-color-main-bg) ;
 		backdrop-filter  : blur(4px) ;
+
+		border-radius : 2px ;
+
+		display         : flex ;
+	    flex-direction  : column ;
+        justify-content : right ;
 	 }
 	  
-.firstTitle { margin-top : 0px ; }
-
 a { text-decoration : none ;
     color           : inherit ;
   }
-  
-nav  { display		    : flex ;
-	   justify-content  : center ;
-	   border-bottom    : 2px solid var(--var-color-nav-bd) ;
-	   
-	   font-size : 2em ;
-	   
-	   position : sticky ;
-     }
+
+a       { color : var(--var-color-link) ;
+	           transition :
+			        color 0.2s ease,
+				    filter 0.2s ease,
+					background-color 0.2s ease ;
+			}
+a:hover { color : var(--var-color-link-hover) ; text-decoration : underline ; }
 	
-nav .navBar { width : 100% ;
+.navBar { 	  width  : 100% ;
+			  margin : 0 ;
+			  padding: 0.5em 0 ;
+
 			  background-color : var(--var-color-nav-bg) ;
-	 		  backdrop-filter  : blur(4px) ;
+	 		  backdrop-filter  : blur(8px) ;
+
+			  top      : 0px ;
+			  position : sticky ;
+			  z-index  : 2 ;
+
+			  display		 : flex ;
+			  justify-content : space-evenly ;
+			  align-items     : center ;
 			}
 
-nav ul { display		 : flex ;
-	     justify-content : space-evenly ;
-		 align-items     : center ;
-		 
-		 padding : 0px ;
-		 margin  : 0.75em auto ;
-	   }
-	   
-nav ul li { list-style : none ;
+.mainLogo { height : 100% ; }
 
-            border        : 2px solid var(--var-color-nav-bd);
-		    border-radius : 0.25em ;
-			
-			padding : 0.2em ;
+.box h1 { margin-top : 0px ; margin-bottom : 0.66em ; color : var(--var-color-main-title) ; }
 
-			backdrop-filter  : blur(0px) ;
+.box h2 { margin : 0.5em 0em ; color : var(--var-color-main-title) ; }
 
-			transition : backdrop-filter 0.5s ease ;
-          }
+.box h3 { margin : 0.33em 0em ; color : var(--var-color-main-title) ; }
 
-nav ul li:hover { backdrop-filter  : blur(8px) }
+.box h4 { margin : 0.25em 0em ; color : var(--var-color-main-title) ; }
+
+.box p { margin : 0.16em 0em ; }
+
+.alignC {	width   : 100% ;
+			display : flex ;
+			justify-content : center ;
+		}
 
 .button	{	padding : 0.75em ;
+
+			color : var(--var-color-main-button-txt) ;
 
 			display : block ;
 		  	width   : fit-content ;
@@ -95,11 +115,12 @@ nav ul li:hover { backdrop-filter  : blur(8px) }
 			box-shadow : 2px 2px 16px  rgb(0, 0, 0, 0.25) ;
 
 			filter : brightness(1.0) ;
-
-			transition : filter 0.5s ease ;
         }
 
-button:hover { filter : brightness(0.9) ; }
+.button:hover { filter : brightness(0.9) ;
+	            background-color : var(--var-color-main-button-hover) ;
+				color : var(--var-color-main-button-txt-hover) !important ;
+			  }
 
 .example { 	width : auto ;
 
@@ -113,11 +134,9 @@ button:hover { filter : brightness(0.9) ; }
 			display : flex ;
 			justify-content : space-between ;
 			align-items     : center ;
-
-
 		 }
 
-.example .falsePrompt { padding : 0em 1em ;
+.example .falsePrompt { padding : 1em 1em ;
 						margin  : 1em ;
 
 						display : flex ;
@@ -137,7 +156,6 @@ button:hover { filter : brightness(0.9) ; }
 .example .falsePrompt p { margin-right : 1em ; }
 
 .example .searchIMG {	width   : 6em ;
-						margin  : 1em 0em ;
 						padding : 0.5em ;
 						color   : var(--var-color-prompt-bd) ;
 						border  : 2px solid var(--var-color-prompt-bd) ;
@@ -154,14 +172,14 @@ button:hover { filter : brightness(0.9) ; }
 
 .example .falseResult p { width      : auto ;
 						  padding    : 0.75em  ;
-
+						  z-index    : 1 ;
 						  position   : absolute ;
 
 						  color      : var(--var-color-prompt-info-txt) ;
 						  text-align : center ;
 
 						  background-color : var(--var-color-prompt-info) ;
-						  backdrop-filter  : blur(4px) ;
+						  backdrop-filter  : blur(2px) ;
 						  border-radius    : 0.5em ;
 						}
 
@@ -169,7 +187,11 @@ button:hover { filter : brightness(0.9) ; }
 						min-width     : 20% ;
 						border-radius : 0.5em ;
 						box-shadow    : 2px 2px 16px  rgb(0, 0, 0, 0.25) ;
+
+						transition : transform 1s ease-out ;
 					 }
+
+.example .exampleIMG:hover { transform : scale(1.02) }
 
 .pageFitC { width : 1400px ;
 		    max-width : 70% ;
