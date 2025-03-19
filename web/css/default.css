@@ -119,7 +119,7 @@ a:hover { color : var(--var-color-link-hover) ; text-decoration : underline ; }
 
 .button:hover { filter : brightness(0.9) ;
 	            background-color : var(--var-color-main-button-hover) ;
-				color : var(--var-color-main-button-txt-hover) !important ;
+				      color : var(--var-color-main-button-txt-hover) !important ;
 			  }
 
 .example { 	width : auto ;
