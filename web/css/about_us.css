@@ -1,6 +1,7 @@
 .avatarIMG
 { border-radius : 50% ;
   width : 80% ;
+  cursor : default ;
 }
 
 .avaterBOX
