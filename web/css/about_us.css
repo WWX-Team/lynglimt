@@ -1,0 +1,26 @@
+.avatarIMG
+{ border-radius : 50% ;
+  width : 80% ;
+}
+
+.avaterBOX
+{ display : flex ;
+  align-items : center ;
+  justify-content : space-evenly ;
+}
+
+.avatarCELL
+{ display : flex ;
+  flex-direction : column ;
+  align-items : center ;
+  justify-content : space-evenly ;
+}
+
+.avatarPSEUDO {	padding : 1em ;
+		margin  : 1em 0em ;
+
+		background-color : var(--var-color-main-bg) ;
+		backdrop-filter  : blur(4px) ;
+
+		border-radius : 2px ;
+	 }
