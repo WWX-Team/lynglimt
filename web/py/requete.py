@@ -11,7 +11,7 @@ from mistralai import Mistral
 from json import loads, JSONDecodeError
 
 # Initialisation
-os.environ.update({"MISTRAL_API_KEY": "dvod95fIn7lOokct8MKRhnghsTDP90dt"})
+os.environ.update({"MISTRAL_API_KEY": None})
 api_key = os.environ["MISTRAL_API_KEY"]
 client = Mistral(api_key=api_key)
 
