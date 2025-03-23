@@ -14,12 +14,13 @@ footer .footerBar { width : 100% ;
                     transition : all 0.2s ease ;
                   }
 
-footer .footerLST { display		 : flex ;
+footer .footerLST { display		      : flex ;
+                    flex-direction  : row ;
                     justify-content : space-between ;
                     align-items     : baseline ;
                     
                     padding : 0px ;
-                    margin  : 0.75em auto ;
+                    margin  : 1em ;
                   }
 
 footer .footerTitle { margin : 0em 0.5em ;
@@ -39,3 +40,18 @@ footer .footerColumn { list-style  : none ;
 footer .footerEl { font-weight : normal !important ; }
 
 footer ul { margin : 0px ; padding : 0px ; }
+
+/* MediaScreen */
+
+@media (max-width: 768px) {
+	.footerLST { margin : 0em !important ; padding : 0em !important ;}
+  .footerTitle { padding : 0.5em 0.125em !important ; }
+  footer .footerEl { font-size : 0.8em ; }
+}
+
+@media (max-width: 480px) {
+	.footerLST { flex-direction : column !important ; }
+  .footerTitle { margin : 0.75em 0em 0em 0.25em !important ; }
+}
+  
+/* 992, 768, 480 */
