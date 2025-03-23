@@ -1,0 +1,116 @@
+:root
+{ --var-color-prompt-bg  : rgb(30, 45, 57) ;
+  --var-color-prompt-txt : rgb(255, 255, 255) ;
+  --var-color-prompt-bd  : rgb(56, 86, 110) ;
+  --var-color-prompt-info     : rgb(17, 47, 71, 0.25) ;
+  --var-color-prompt-info-txt : rgb(240, 240, 240) ;
+  --var-color-dot        : rgba(255, 255, 255, 0.75) ;
+  --var-color-dot-active : rgba(179, 219, 255, 0.85) ;
+}
+
+.example
+{ width  : 100% ;
+  height : auto ;
+
+  display         : flex ;
+  justify-content : space-between ;
+  align-items     : center ;
+}
+
+.examplePrompt
+{ display : flex ;
+  justify-content : space-between ;
+  align-items     : center ;
+
+  min-width : 25% ;
+  padding : 1em ;
+
+  background    : var(--var-color-prompt-bg) ;
+  border        : 2px solid var(--var-color-prompt-bd) ;
+  border-radius : 0.5em ;
+  color         : var(--var-color-prompt-txt) ;
+}
+
+.exPromptText
+{ padding : 1em ;
+  margin  : 0em ;
+
+  width : 100% ;
+
+  background    : none ;
+  border        : 2px solid var(--var-color-prompt-bd) ;
+  border-radius : 0.5em ;
+}
+
+.exPromptIMG
+{ width  : 4em ;
+  margin-left : 1em ;
+
+  color : var(--var-color-prompt-bd) ;
+}
+
+.exampleResult
+{ display : flex ;
+  flex-direction  : column;
+  justify-content : space-between ;
+  align-items     : center ;
+
+  width : 100% ;
+
+  margin-left : 1em ;
+  perspective : 1000px ;
+
+}
+
+.exResultIMG
+{ width : 100% ;
+  position : relative ;
+  border-radius : 0.5em ;
+
+  transition : filter 0.25s ease-in-out, transform 0.5s ease-out ;
+  transform-style  : preserve-3d ;
+  transform-origin : center ;
+}
+.exResultText
+{ width : 80% ;
+  border-radius : 0.5em ;
+
+  background    : var(--var-color-prompt-info) ;
+  border-radius : 0.5em ;
+  color         : var(--var-color-prompt-info-txt) ;
+  padding       : 0.5em ;
+  text-align    : center ;
+}
+
+.exampleNav
+{ width   : fit-content ;
+  display : flex ;
+  flex-direction  : row !important ;
+  justify-content : space-between ;
+  align-items     : center ;
+  align-self      : center ;
+
+  gap : 10px ;
+}
+
+.dot
+{ width  : 1em ;
+  height : 1em ;
+  border-radius : 50% ;
+  background    : var(--var-color-dot) ;
+  transition    : background-color 0.2s ;
+}
+.dot:hover  { background : var(--var-color-dot-active) !important ; }
+.dot.active { background : var(--var-color-dot-active) !important ; }
+
+/* MediaScreen */
+
+@media (max-width: 992px) {
+.example { flex-direction : column ; }
+.examplePrompt { margin  : 0.5em ; padding : 0.75em !important ; }
+.exPromptText  { padding : 0.75em !important ; }
+.exampleResult { margin  : 0.5em ; perspective : none !important ; }
+.exampleNav { margin-bottom : 1em ; }
+}
+
+/* 992, 768, 480 */
