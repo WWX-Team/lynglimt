@@ -95,4 +95,27 @@ def analyse(prompt : str, result : dict) -> tuple :
      - raisonnement de l'IA ;
     Retourne un tuple contenant deux arbres binaires.
     """
+    corres = Cellule('A', 0, None)
+    path = Cellule('B', 0, None)
+
+    # Correspondance mots-clés/prompt
+    for el in result["motsCles"] :
+        if recherche(el, prompt) > 0 :
+            corres.ajouter(el, True, None)
+        else :
+            corres.ajouter(el, False, None)
+    
+    ab_corres = ArbreBinaire(corres.tag.nom, corres.tag.val, None, None)
+    while corres.suivante is not None :
+        corres = corres.suivante
+        if corres.tag.val :
+            ab_corres.arbreGauche = ArbreBinaire(corres.tag.nom, corres.tag.val, None, None)
+            ab_corres = ab_corres.arbreGauche
+        else :
+            ab_corres.arbreDroite = ArbreBinaire(corres.tag.nom, corres.tag.val, None, None)
+            ab_corres = ab_corres.arbreDroite
+    
+    # "Raisonnement" de l'IA
+
+
     return (ArbreBinaire('A', 0, None, None), ArbreBinaire('B', 0, None, None))
