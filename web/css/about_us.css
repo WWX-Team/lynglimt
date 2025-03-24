@@ -26,3 +26,18 @@
 
   border-radius : 4px ;
 	 }
+	
+.avatarPSEUDO2
+{ padding : 0.5em ;
+  margin  : 0.5em ;
+  margin-right : 4.5em ;
+
+  background-color : var(--var-color-main-bg) ;
+  backdrop-filter  : blur(4px) ;
+
+  border-radius : 4px ;
+	 }
+	 
+.hidden_link{
+	display : inline-block ;
+}
