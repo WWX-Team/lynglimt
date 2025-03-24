@@ -1,1 +1,85 @@
-canvas { background: #eee; }
+#painperdus { display         : flex ;
+	    flex-direction  : column ;
+	    align-items     : center ;
+
+		background-color      : purple ;
+		background-attachment : fixed;
+		background-repeat : no-repeat ;
+		background-size   : cover;
+		} 
+
+#anselme { display         : flex ;
+	    flex-direction  : column ;
+	    align-items     : center ;
+
+		background-color      : red ;
+		background-attachment : fixed;
+		background-repeat : no-repeat ;
+		background-size   : cover;
+		} 
+		
+#matheo { display         : flex ;
+	    flex-direction  : column ;
+	    align-items     : center ;
+
+		background-color      : green ;
+		background-attachment : fixed;
+		background-repeat : no-repeat ;
+		background-size   : cover;
+		} 
+		
+#bismarck { display         : flex ;
+	    flex-direction  : column ;
+	    align-items     : center ;
+
+		background-color      : purple ;
+		background-attachment : fixed;
+		background-repeat : no-repeat ;
+		background-size   : cover;
+		} 
+
+body { padding : 0px ;
+       margin  : 0px ;
+	   background-color : var(--var-color-bg) ;
+	   
+	   font-family : "apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif ;
+	 }
+	 
+.navBar { 	  width  : 100% ;
+			  margin : 0 ;
+			  padding: 0.5em 0 ;
+
+			  background-color : var(--var-color-nav-bg) ;
+	 		  backdrop-filter  : blur(8px) ;
+
+			  top      : 0px ;
+			  position : sticky ;
+			  z-index  : 2 ;
+
+			  display		 : flex ;
+			  justify-content : space-evenly ;
+			  align-items     : center ;
+			}
+
+.mainLogo { height : 100% ; }
+
+#main { margin : 2em 0em ; color : var(--var-color-main-txt) ; }
+
+.box {	padding : 1em ;
+		margin  : 1em 0em ;
+
+		background-color : var(--var-color-main-bg) ;
+		backdrop-filter  : blur(4px) ;
+
+		border-radius : 2px ;
+
+		display         : flex ;
+	    flex-direction  : column ;
+	 }
+	 
+.pageFitC
+{ width : 1400px ;
+  max-width : 70% ;
+}
+
+
