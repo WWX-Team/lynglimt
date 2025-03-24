@@ -27,7 +27,7 @@ def request(description : str) -> list :
         - sa date de publication (dans "date") ;
         - le type du tableau (peinture à l'huile, fuseau)) ou le composant de la sculpture (dans "type") ;
         - une liste de 5 à 10 mot clés dans un ordre logique décrivant l'œuvre (dans "motsCles") ;
-        - une liste de couple de données contenant respectivement :
+        - une liste de couple de données (dans "mindpath") contenant respectivement :
             - un élément de la description
             - un entier compris entre 0 et 100 correspondant à la présence ou non de l'extrait précédent dans l'oeuvre choisie ; 
             et contenant de préférence tous les éléments de la description ;
