@@ -97,6 +97,8 @@ def analyse(prompt : str, result : dict) -> tuple :
     """
     corres = Cellule('A', 0, None)
     path = Cellule('B', 0, None)
+    ab_corres = ArbreBinaire(corres.tag.nom, corres.tag.val, None, None)
+    ab_path = ArbreBinaire(path.tag.nom, path.tag.val, None, None)
 
     # Correspondance mots-clés/prompt
     for el in result["motsCles"] :
@@ -105,7 +107,6 @@ def analyse(prompt : str, result : dict) -> tuple :
         else :
             corres.ajouter(el, False, None)
     
-    ab_corres = ArbreBinaire(corres.tag.nom, corres.tag.val, None, None)
     while corres.suivante is not None :
         corres = corres.suivante
         if corres.tag.val :
@@ -115,7 +116,17 @@ def analyse(prompt : str, result : dict) -> tuple :
             ab_corres.arbreDroite = ArbreBinaire(corres.tag.nom, corres.tag.val, None, None)
             ab_corres = ab_corres.arbreDroite
     
-    # "Raisonnement" de l'IA
+    # "Raisonnement" de l'IA    [[element, 0-100], ...]
+    for eL in result["mindpath"] :       # créer "mindpath":list dans result
+        path.ajouter(eL[0], eL[1], None)
+    
+    while path.suivante is not None :
+        path = path.suivante
+        if path.tag.val >= 50 :
+            ab_path.arbreGauche = ArbreBinaire(path.tag.nom, path.tag.val, None, None)
+            ab_path = ab_path.arbreGauche
+        else :
+            ab_path.arbreDroite = ArbreBinaire(path.tag.nom, path.tag.val, None, None)
+            ab_path = ab_path.arbreDroite
 
-
-    return (ArbreBinaire('A', 0, None, None), ArbreBinaire('B', 0, None, None))
+    return (ab_corres, ab_path)
