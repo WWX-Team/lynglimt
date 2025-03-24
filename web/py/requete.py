@@ -27,8 +27,12 @@ def request(description : str) -> list :
         - sa date de publication (dans "date") ;
         - le type du tableau (peinture à l'huile, fuseau)) ou le composant de la sculpture (dans "type") ;
         - une liste de 5 à 10 mot clés dans un ordre logique décrivant l'œuvre (dans "motsCles") ;
+        - une liste de couple de données contenant respectivement :
+            - un élément de la description
+            - un entier compris entre 0 et 100 correspondant à la présence ou non de l'extrait précédent dans l'oeuvre choisie ; 
+            et contenant de préférence tous les éléments de la description ;
         - un lien vers la page wikipédia français du tableau (si possible) (dans "lienWiki") ;
-        - un lien vers une image correspondant au tableau (si possible (dans "lienIMG"), de préférence, sur wikimedia commons).
+        - un lien vers une image correspondant au tableau (si possible (dans "lienIMG"), de préférence, sur wikimedia commons);
         Construit ton tableau avec 1, 2, 4 ou 6 oeuvres,
         en plaçant en premier celle qui est la plus plausible de correspondre à la description.""",
     } ]
