@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # analyse
 #
 # analyse les résultats d'une requête
@@ -7,13 +5,14 @@
 ### Classes
 
 class Tag :
-    """Couple Étiquette / Valeur."""
+    """Couple Nom / Valeur [Étiquette]."""
     
     def __init__(self, nom : str, valeur):
         self.nom : str = nom
         self.val       = valeur
         
     def obtenir(self) -> tuple :
+        """retourne le couple de l'étiquette"""
         return (self.nom, self.val)
 
 class Cellule : 
@@ -30,19 +29,39 @@ class Cellule :
         raise IndexError("index en dehors des limites")
     
     def ajouter(self, cellule : 'Cellule'):
+        """équivalent d'append, complexité égale à la longueur de la liste chaînée"""
         if self.suivante is not None : return self.suivante.ajouter(cellule)
         self.suivante = cellule
+        
+    def val(self)  -> any : return self.tag.obtenir()[1]
+    def name(self) -> any : return self.tag.obtenir()[0]
+        
+    def estDerniere(self) -> bool:
+        """retourne un booléen indiquant s'il s'agit de la dernière cellule"""
+        return self.suivante is None
+    
+    def obtenirSuivante(self) -> 'Cellule' :
+        """retourne la cellule suivante"""
+        return self.suivante
         
 class ArbreBinaire :
     """Implémentation d'un arbre binaire."""
     
-    def __init__(self, nom : str, valeur, gauche : 'ArbreBinaire', droite : 'ArbreBinaire') :
+    def __init__(self, nom : str, valeur, gauche : 'ArbreBinaire' = None, droite : 'ArbreBinaire' = None) :
         self.tag : 'Tag' = Tag(nom, valeur)
         self.arbreGauche = gauche
         self.arbreDroite = droite
         
     def obtenir(self) -> tuple :
+        """retourne l'étiquette associée au nœud de l'arbre"""
         return self.tag.obtenir()
+    
+    def val(self)  -> any : return self.tag.obtenir()[1]
+    def name(self) -> any : return self.tag.obtenir()[0]
+    
+    def estFeuille(self) -> bool :
+        """retourne un booléen indiquant si le nœud est une feuille"""
+        return self.arbreDroite is None and self.arbreGauche is None
 
 ### Fonctions
 
@@ -51,14 +70,14 @@ def recherche(sequence : str, texte : str) -> set :
        Retourne toute les occurences de [sequence : str] dans [texte : str],
        dans un ensemble."""
        
-    def table(txt : str):
+    def table(sequence : str):
         """construit la table de décalages de Boyer-Moore :
-           ‹d[j][c]› est le plus grand entier ‹k < j› tel que ‹txt[k] == c›,
+           ‹d[j][c]› est le plus grand entier ‹k < j› tel que sequence[k] == c›,
            s'il existe, et n'est pas défini sinon"""
-        d = [{} for _ in range(len(txt))]
-        for j in range(len(txt)) :
+        d = [{} for _ in range(len(sequence))]
+        for j in range(len(sequence)) :
             for k in range(j):
-                d[j][txt[k]] = k
+                d[j][sequence[k]] = k
         return d
     
     def decalage(d : list, j : int, c : str):
@@ -69,7 +88,7 @@ def recherche(sequence : str, texte : str) -> set :
     
     # Init Variables
     s = set()
-    d = table(texte)
+    d = table(sequence)
     # Boucle de recherche
     i : int = 0
     while i <= len(texte) - len(sequence) :
@@ -80,7 +99,7 @@ def recherche(sequence : str, texte : str) -> set :
             if texte[i + j] != sequence[j] :
                 k = decalage(d, j, texte[i + j])
                 break
-        # Si cohérence, on sauvegarde la positio,
+        # Si cohérence, on sauvegarde la position,
         if k == 0 :
             s.add(i)
             k += 1
@@ -95,38 +114,38 @@ def analyse(prompt : str, result : dict) -> tuple :
      - raisonnement de l'IA ;
     Retourne un tuple contenant deux arbres binaires.
     """
-    corres = Cellule('A', 0, None)
-    path = Cellule('B', 0, None)
-    ab_corres = ArbreBinaire(corres.tag.nom, corres.tag.val, None, None)
-    ab_path = ArbreBinaire(path.tag.nom, path.tag.val, None, None)
-
+    # Init données
+    MotCles = Cellule('Résultat', 0, None)
+    Logique = Cellule('Résultat', 0, None)
+    arbreMotCles = ArbreBinaire(MotCles.name(), MotCles.val(), None, None)
+    arbreLogique = ArbreBinaire(Logique.name(), Logique.val(), None, None)
     # Correspondance mots-clés/prompt
     for el in result["motsCles"] :
-        if recherche(el, prompt) > 0 :
-            corres.ajouter(el, True, None)
+        if len(recherche(el.lower(), prompt.lower())) > 0 :
+            MotCles.ajouter(Cellule(el, 100, None))
         else :
-            corres.ajouter(el, False, None)
-    
-    while corres.suivante is not None :
-        corres = corres.suivante
-        if corres.tag.val :
-            ab_corres.arbreGauche = ArbreBinaire(corres.tag.nom, corres.tag.val, None, None)
-            ab_corres = ab_corres.arbreGauche
-        else :
-            ab_corres.arbreDroite = ArbreBinaire(corres.tag.nom, corres.tag.val, None, None)
-            ab_corres = ab_corres.arbreDroite
-    
-    # "Raisonnement" de l'IA    [[element, 0-100], ...]
-    for eL in result["mindpath"] :       # créer "mindpath":list dans result
-        path.ajouter(eL[0], eL[1], None)
-    
-    while path.suivante is not None :
-        path = path.suivante
-        if path.tag.val >= 50 :
-            ab_path.arbreGauche = ArbreBinaire(path.tag.nom, path.tag.val, None, None)
-            ab_path = ab_path.arbreGauche
-        else :
-            ab_path.arbreDroite = ArbreBinaire(path.tag.nom, path.tag.val, None, None)
-            ab_path = ab_path.arbreDroite
-
-    return (ab_corres, ab_path)
+            MotCles.ajouter(Cellule(el, 0, None))
+    # Construction de l'abre par effet de bord
+    arbreMotClesCopy = arbreMotCles
+    MotCles = MotCles.obtenirSuivante()
+    while not MotCles.estDerniere() :
+        arbreMotClesCopy.arbreDroite = ArbreBinaire(MotCles.name(), MotCles.val(), None, None)
+        arbreMotClesCopy.arbreGauche = ArbreBinaire('Ø', 100 - MotCles.val(), None, None)
+        if MotCles.val() == 100 : arbreMotClesCopy = arbreMotClesCopy.arbreDroite
+        else                    : arbreMotClesCopy = arbreMotClesCopy.arbreGauche
+        MotCles = MotCles.obtenirSuivante()
+    # Pseudo Raisonnement de l'IA [[element, 0-100], [bla, 0-100], …]
+    for eL in result["mindpath"] :
+        if not len(eL) == 2: raise RuntimeError('Mistral a rencontré un problème, veuillez réessayer.')
+        Logique.ajouter(Cellule(eL[0], eL[1], None))
+    # Construction de l'abre par effet de bord
+    arbreLogiqueCopy = arbreLogique
+    Logique = Logique.obtenirSuivante()
+    while not Logique.estDerniere() :
+        arbreLogiqueCopy.arbreDroite = ArbreBinaire(Logique.name(), Logique.val(), None, None)
+        arbreLogiqueCopy.arbreGauche = ArbreBinaire('Ø', 100 - Logique.val(), None, None)
+        if Logique.val() >= 50 : arbreLogiqueCopy = arbreLogiqueCopy.arbreDroite
+        else                   : arbreLogiqueCopy = arbreLogiqueCopy.arbreGauche
+        Logique = Logique.obtenirSuivante()
+    # Retour
+    return (arbreMotCles, arbreLogique)
