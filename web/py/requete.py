@@ -1,23 +1,20 @@
-# -*- coding: utf-8 -*-
-
 # requests
 #
-# envoie des requêtes à Mistral API
+# envoie (et traite) des requêtes à Mistral API
 
 import os
-import asyncio
 
 from mistralai import Mistral
 from json import loads, JSONDecodeError
 
 # Initialisation
-os.environ.update({"MISTRAL_API_KEY": "clé nécessaire"})
+os.environ.update({"MISTRAL_API_KEY": "CLÉ-API"}) # CLÉ À INSÉRER
 api_key = os.environ["MISTRAL_API_KEY"]
 client = Mistral(api_key=api_key)
 
 # Fonction requête
 def request(description : str) -> list :
-    """"""
+    """envoie une requêtre à Mistrai Console et vérifie le bon format des données apparant"""
     requests = [ {
         "role": "user",
         "content": f"""Peux-tu me nommer des tableaux / sculptures dont la description est la suivante : \"{description}\".
@@ -31,10 +28,9 @@ def request(description : str) -> list :
             - un élément de la description
             - un entier compris entre 0 et 100 correspondant à la présence ou non de l'extrait précédent dans l'oeuvre choisie ; 
             et contenant de préférence tous les éléments de la description ;
-        - un lien vers la page wikipédia français du tableau (si possible) (dans "lienWiki") ;
-        - un lien vers une image correspondant au tableau (si possible (dans "lienIMG"), de préférence, sur wikimedia commons);
-        Construit ton tableau avec 1, 2, 4 ou 6 oeuvres,
-        en plaçant en premier celle qui est la plus plausible de correspondre à la description.""",
+        - un lien vers la page wikipédia français du tableau (dans "lienWiki") ;
+        Place en premier celle qui est la plus plausible de correspondre à la description.
+        VEILLE À NE PAS UTILISER PLUSIEURS FOIS LE MÊME TABLEAU.""",
     } ]
     chat_response = client.chat.complete(model = "mistral-small-latest", messages = requests, response_format = {"type": "json_object"})
     try    : reponse = loads(chat_response.choices[0].message.content)
@@ -43,7 +39,7 @@ def request(description : str) -> list :
     return reponse
         
 def check(result : list) -> bool :
-    """"""
+    """vérifie en profondeur le bon format d'un résultat de requête"""
     if not isinstance(result, list) :
         raise ValueError("résultat n'est pas une liste")
     keys = ["nom", "date", "auteur"]
